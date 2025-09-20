@@ -16,3 +16,19 @@ class EmailsendView(View):
             return HttpResponse("mail sent succesfully")
         else:
             return HttpResponse("mail sent unsuccesful")
+        
+class MailSend(View):
+    def get(self,request):
+        return render(request,"mailform.html")
+    
+    def post(self,request):
+        sub=request.POST.get("subject")
+        msg=request.POST.get("msg")
+        mailid=request.POST.get("mailid")
+        res=send_mail(sub,msg,settings.EMAIL_HOST_USER,[mailid])
+        if res:
+            return HttpResponse("mail succesfull")
+        else:
+            return HttpResponse("mail not succesfull")
+
+        
