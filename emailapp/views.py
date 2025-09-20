@@ -1,7 +1,10 @@
 from django.shortcuts import render
+# for sending msg 
 from django.core.mail import send_mail,settings
 from django.views import View
 from django.http import HttpResponse
+# for showing message 
+from django.contrib import messages
 
 
 # Create your views here.
@@ -25,10 +28,8 @@ class MailSend(View):
         sub=request.POST.get("subject")
         msg=request.POST.get("msg")
         mailid=request.POST.get("mailid")
-        res=send_mail(sub,msg,settings.EMAIL_HOST_USER,[mailid])
-        if res:
-            return HttpResponse("mail succesfull")
-        else:
-            return HttpResponse("mail not succesfull")
+        send_mail(sub,msg,settings.EMAIL_HOST_USER,[mailid])
+        messages.success(request,"Message sent successfully")
+        return render(request,"mailform.html")
 
         
