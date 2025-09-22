@@ -17,9 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from emailapp import views
+from fileUpload import views as fileview
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('sendmail/', views.EmailsendView.as_view()),
     path('mailform/', views.MailSend.as_view(),name="mailform"),
+    path('file', fileview.ProfileView.as_view(),name="file"),
+    path('home', fileview.Homeview.as_view(),name="homeview"),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
