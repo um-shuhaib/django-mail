@@ -29,6 +29,7 @@ class MailSend(View):
         msg=request.POST.get("msg")
         mailid=request.POST.get("mailid")
         send_mail(sub,msg,settings.EMAIL_HOST_USER,[mailid])
+        # messages.error(request,"Message NOT sent successfully")
         messages.success(request,"Message sent successfully")
         return render(request,"mailform.html")
 
