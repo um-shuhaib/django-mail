@@ -29,3 +29,4 @@ urlpatterns = [
     path('home', fileview.Homeview.as_view(),name="homeview"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
